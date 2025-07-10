@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 const Register = () => {
     const { register , reset, handleSubmit } = useForm();
     const navigate =  useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const RegisterHandler = (user) => {
         user.id = nanoid(); 
@@ -45,7 +45,7 @@ const Register = () => {
             </Link>
         </p>
     </form>
-  )
-}
+  );
+};
 
 export default Register;
