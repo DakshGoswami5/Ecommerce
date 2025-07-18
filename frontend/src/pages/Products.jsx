@@ -1,38 +1,40 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
+import { lazy, Suspense } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import useInfiniteProducts from "../utils/useInfiniteProducts";
+
+
+const ProductTemplate = lazy(() => import("../components/ProductTemplate"));
 
 const Products = () => {
+  
+  const { products, hasMore, fetchproducts} = useInfiniteProducts();
 
-  const products = useSelector((state) => state.productReducer.products);
-
-  const renderproduct = products.map(product => {
-    return (
-      <div 
-        className="w-[30%] mr-3 mb-3 border shadow" 
-        key={product.id}
-      >
-        <img 
-          className="w-full h-[30vh] object-cover" 
-          src={product.image} 
-          alt=""
-        />
-        <h1>{product.title}</h1>
-        <small>{product.description.slice(0, 100)}..</small>
-        <div className="p-3 mt-3 flex justify-between items-center">
-          <p>{product.price}</p>
-          <button>Add to Cart</button>
-        </div>
-        <Link className="block w-1/2 m-auto" to={`/product/${product.id}`}>More Info</Link>
-      </div>
-    );
-  });
-
-  return products.length > 0 ? 
-    <div 
-      className="overflow-auto flex flex-wrap">
-      {renderproduct}
-    </div> : "Loading...";
+  return <InfiniteScroll   
+          dataLength={products.length} 
+          next={fetchproducts} 
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>} 
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }><div className="flex flex-wrap">
+            {products.map((product) => (
+              <Suspense 
+              key={product.id} 
+              fallback={
+              <h1 className="text-center text-5xl text-yellow-500">
+                Loading...
+              </h1>}>
+                <ProductTemplate product={product}/>
+              </Suspense>
+            ))}
+            
+                
+            
+            </div>
+          </InfiniteScroll>
 };
 
 export default Products;

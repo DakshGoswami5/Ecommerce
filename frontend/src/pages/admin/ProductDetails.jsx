@@ -11,8 +11,6 @@ const ProductDetails = () => {
     userReducer: { users }, 
   } = useSelector((state) => state);
   const product = products?.find((product) => product.id == id);
-  console.log(product,users);
-
 
 
     const { register , reset, handleSubmit } = useForm({

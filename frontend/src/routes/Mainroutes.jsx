@@ -1,20 +1,58 @@
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Products from "../pages/Products";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import CreateProduct from "../pages/admin/CreateProduct";
-import ProductDetails from "../pages/admin/ProductDetails";
+
+const Products = lazy(() => import("../pages/Products"));
+const Login = lazy(() => import("../pages/Login"));
+const Register = lazy(() => import("../pages/Register"));
+const CreateProduct = lazy(() => import("../pages/admin/CreateProduct"));
+const ProductDetails = lazy(() => import("../pages/admin/ProductDetails"));
+const UserProfile = lazy(() => import("../pages/user/UserProfile"));
+const PageNotFound = lazy(() => import("../pages/PageNotFound"));
+const UnAuthWrapper = lazy(() => import("./UnAuthWrapper"));
+const AuthWrapper = lazy(() => import("./AuthWrapper"));
+const Cart = lazy(() => import("../pages/Cart"));
+
 
 const Mainroutes = () => {
+
+
   return (
     <Routes>
-      <Route path="/" element={<Home/>}></Route>
-      <Route path="/products" element={<Products/>}></Route>
-      <Route path="/login" element={<Login/>}></Route>
-      <Route path="/register" element={<Register/>}></Route>
-      <Route path="/admin/create-product" element={<CreateProduct/>}></Route>
-      <Route path="/product/:id" element={<ProductDetails/>}></Route>
+      <Route path="/" element={<Products/>}></Route>
+
+      <Route path="/login" element={
+        <UnAuthWrapper>
+          <Login/>
+        </UnAuthWrapper>}>
+      </Route>
+      <Route path="/register" element={
+        <UnAuthWrapper>
+          <Register/>
+        </UnAuthWrapper>}>
+      </Route>
+
+      <Route path="/admin/create-product" element={
+        <AuthWrapper>
+          <CreateProduct/>
+        </AuthWrapper>}>
+      </Route>
+      <Route path="/admin/user-profile" element={
+        <AuthWrapper>
+          <UserProfile/>
+        </AuthWrapper>}>
+      </Route>
+      <Route path="/product/:id" element={
+        <AuthWrapper>
+          <ProductDetails/>
+        </AuthWrapper>}>
+      </Route>
+      <Route path="/cart" element={
+        <AuthWrapper>
+          <Cart/>
+        </AuthWrapper>}>
+      </Route>
+
+      <Route path="*" element={<PageNotFound/>}></Route>
     </Routes>
   )
 }
