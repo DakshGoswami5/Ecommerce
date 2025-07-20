@@ -14,17 +14,19 @@ const Products = () => {
           dataLength={products.length} 
           next={fetchproducts} 
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>} 
+          loader={
+          <div className="text-center text-yellow-400">Loading products...</div>} 
           endMessage={
-            <p style={{ textAlign: 'center' }}>
+            <p className="text-center text-sm text-gray-400">
               <b>Yay! You have seen it all</b>
             </p>
-          }><div className="flex flex-wrap">
+          }>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
               <Suspense 
               key={product.id} 
               fallback={
-              <h1 className="text-center text-5xl text-yellow-500">
+              <h1 className="text-center text-2xl text-yellow-500">
                 Loading...
               </h1>}>
                 <ProductTemplate product={product}/>

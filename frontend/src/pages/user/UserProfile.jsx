@@ -37,39 +37,41 @@ const UserProfile = () => {
 
 
   return users ? (
-    <div>
-        <h1 className="font-thin text-5xl text-gray-400">{users.username}</h1>
-        <h1 className="font-thin text-xl text-gray-400">{users.email}</h1>
-        <hr className="my-10"/>
+    <div className="w-full min-h-screen flex items-center justify-center px-4 bg-neutral-950 text-white">
+      <div className="w-full max-w-screen-sm bg-neutral-900 p-6 rounded-2xl shadow-md border border-neutral-800">
+        <h1 className="text-3xl font-semibold text-white mb-2">{users.username}</h1>
+        <p className="text-neutral-400 text-sm mb-6">{users.email}</p>
+        
         <form 
         onSubmit={handleSubmit(UpdateUserHandler)} 
-        className="w-full flex flex-col justify-start items-start">
+        className="flex flex-col gap-4">
         <input 
         {...register("username")}
-        className="mb-3 outline-0 border-b p-2 text-4xl"
+        className="w-full p-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         type="text"
         placeholder="John Doe"
         />
         <input 
         {...register("email")}
-        className="mb-3 outline-0 border-b p-2 text-4xl"
+        className="w-full p-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         type="email"
         placeholder="john@doe.com"
         />
         <input 
         {...register("password")}
-        className="mb-3 outline-0 border-b p-2 text-4xl"
+        className="w-full p-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
         type="password"
         placeholder="******"
         />
-        <button className="mt-5 py-2 px-4 bg-green-400 rounded">
+        <button 
+        className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold transition duration-200">
           Update User
         </button>
 
         <button 
         type="button" 
         onClick={LogoutHandler} 
-        className="mt-5 py-2 px-4 bg-blue-400 rounded"
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl font-semibold transition duration-200"
         >
         Logout User
         </button>
@@ -77,14 +79,17 @@ const UserProfile = () => {
         <button 
         type="button" 
         onClick={DeleteHandler} 
-        className="mt-5 py-2 px-4 bg-red-400 rounded"
+        className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition duration-200"
         >
         Delete User
         </button>
       </form>
     </div>
+  </div>
   ) : (
-    "Loading..."
+    <div className="text-white flex justify-center items-center h-screen">
+      Loading...
+    </div>
     );
 };
 
