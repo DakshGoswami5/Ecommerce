@@ -20,7 +20,8 @@ const App = () => {
   // }, [products]);
 
   return (
-    <div className="px-[10%] text-white font-thin w-screen bg-gray-800">
+    <div className="px-[10%] font-thin bg-gradient-to-br from-[#d0d0d0] to-[#4b4b4b]
+">
       <Nav/>
       <Mainroutes/>
     </div>

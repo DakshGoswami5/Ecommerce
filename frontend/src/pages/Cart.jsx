@@ -21,7 +21,7 @@ const Cart = () => {
   const DecreaseQuantityHandler = (index, product) => {
     const copyuser = { ...users, cart: [...users.cart] };
 
-      if(users.cart[index].quantity > 0){
+      if(users.cart[index].quantity > 1){
         copyuser.cart[index] = { 
           ...copyuser.cart[index], 
           quantity: copyuser.cart[index].quantity - 1,
@@ -35,7 +35,7 @@ const Cart = () => {
   };
 
   const cartItem = users.cart.map ((c, index) => (
-    <li className="bg-white flex flex-col md:flex-row md:items-center justify-between gap-5 mb-6 p-4 rounded-2xl shadow-md transition hover:shadow-xl" key={c.product.id}>
+    <li className="bg-[#eeeeee] flex flex-col md:flex-row md:items-center justify-between gap-5 mb-6 p-4 rounded-2xl shadow-md transition hover:shadow-xl" key={c.product.id}>
       <div className="flex items-center gap-4">
       <img 
         className="w-24 h-24 rounded-xl object-cover" 
@@ -67,12 +67,12 @@ const Cart = () => {
 ));
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-gray-400">Your Cart</h1>
+    <div className="min-h-screen p-4 max-w-3xl mx-auto bg-transparent">
+      <h1 className="text-3xl font-bold mb-6 text-gray-600">Your Cart</h1>
       {users.cart.length > 0 ? (
         <ul>{cartItem}</ul>
       ) : (
-        <p className="text-gray-500 text-center mt-10">Your Cart is Empty 🛒</p>
+        <p className="text-3xl text-gray-100 text-center mt-10">Your Cart is Empty 🛒</p>
       )}
     </div>
   );
